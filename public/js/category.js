@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const API_URL = 'http://localhost:3000/api';
+    const API_URL = 'https://polarix-backend.onrender.com/api';
     const user = JSON.parse(localStorage.getItem('user')) || {};
     let incomeBarChart, assetPieChart, expenseBarChart, liabilityPieChart;
     let showingAssetTable = false;
