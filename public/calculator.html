@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>PolariX Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+    
+</head>
+<body>
+    <div class="calculator-wrapper" style="display:flex;">
+        <div class="calculator-card fade-in">
+            <h2>EMI Calculator</h2>
+            <div class="input-group">
+                <label>Loan Amount (₹)</label>
+                <input type="number" id="loanAmount" placeholder="e.g. 500000" />
+            </div>
+            <div class="input-group">
+                <label>Interest Rate (% p.a.)</label>
+                <input type="number" id="interestRate" placeholder="e.g. 8" />
+            </div>
+            <div class="input-group">
+                <label>Loan Tenure (years)</label>
+                <input type="number" id="tenure" placeholder="e.g. 5" />
+            </div>
+            <button onclick="calculateEMI()">Calculate EMI</button>
+            <div class="result" id="emiResult"></div>
+        </div>
+
+        <div class="calculator-card fade-in">
+            <h2>Tax Calculator</h2>
+            <div class="input-group">
+                <label>Annual Income (₹)</label>
+                <input type="number" id="income" placeholder="e.g. 900000" />
+            </div>
+            <button onclick="calculateTax()">Calculate Tax</button>
+            <div class="result" id="taxResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // EMI Calculation
+        function calculateEMI() {
+            const P = parseFloat(document.getElementById('loanAmount').value);
+            const R = parseFloat(document.getElementById('interestRate').value) / 12 / 100;
+            const N = parseFloat(document.getElementById('tenure').value) * 12;
+
+            if (isNaN(P) || isNaN(R) || isNaN(N)) {
+                alert("Please enter valid loan details.");
+                return;
+            }
+
+            const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+            const result = document.getElementById('emiResult');
+            result.innerHTML = `<strong>Monthly EMI:</strong> ₹${emi.toFixed(2)}`;
+            result.classList.add('show');
+        }
+
+        // Tax Calculation
+        function calculateTax() {
+            let income = parseFloat(document.getElementById('income').value);
+            if (isNaN(income)) {
+                alert("Please enter valid income.");
+                return;
+            }
+
+            let tax = 0;
+            let ra = 0;
+            const slabs = [
+                { limit: 300000, rate: 0 },
+                { limit: 300000, rate: 0.05 },
+                { limit: 300000, rate: 0.10 },
+                { limit: 300000, rate: 0.15 },
+                { limit: 300000, rate: 0.20 },
+                { limit: Infinity, rate: 0.30 }
+            ];
+
+            for (let slab of slabs) {
+                if (income > 0) {
+                    let taxable = Math.min(income, slab.limit);
+                    tax += taxable * slab.rate;
+                    ra = slab.rate;
+                    income -= taxable;
+                } else break;
+            }
+
+            const result = document.getElementById('taxResult');
+            result.innerHTML = `<strong>Tax Payable:</strong> ₹${tax.toFixed(2)}<br><strong>Rate:</strong> ${ra * 100}%`;
+            result.classList.add('show');
+        }
+
+        // Scroll Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => observer.observe(element));
+    </script>
+</body>
+</html>

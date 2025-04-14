@@ -1,0 +1,112 @@
+.chart-row-category {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+  }
+  
+  .chart-container-category {
+    flex: 1;
+    max-width: 48%;
+    background: #000000;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Bar chart containers */
+  .chart-container-category:not(#assetChartContainer):not(#liabilityChartContainer) {
+    height: 350px;
+  }
+  
+  /* Pie chart containers */
+  #assetChartContainer,
+  #liabilityChartContainer {
+    width: 350px;
+    height: 350px;
+    max-width: 48%;
+  }
+  
+  .chart-container-category .canvas-category {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 310px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .chart-container-category .canvas-category.hidden {
+    opacity: 0;
+  }
+  
+  .table-container {
+    display: none;
+    width: 100%;
+    max-height: 310px;
+    overflow-y: auto;
+    margin-top: 10px;
+    background: #000000;
+    border-radius: 8px;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .table-container.visible {
+    opacity: 1;
+  }
+  
+  .distribution-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+  }
+  
+  .distribution-table th,
+  .distribution-table td {
+    padding: 8px;
+    border: 1px solid #333333;
+    text-align: left;
+  }
+  
+  .distribution-table th {
+    background-color: #1a1a1a;
+    font-weight: bold;
+  }
+  
+  .table-container p {
+    color: #ffffff;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .chart-container-category {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: auto;
+    clip: true;
+    max-width: 500px; /* Adjust as needed */
+    padding: 30px; /* Add more padding here */
+  }
+  
+  
+  @media (max-width: 768px) {
+    .chart-row-category {
+      flex-direction: column;
+      align-items: center;
+    }
+    .chart-container-category {
+      max-width: 100%;
+      width: fit-content;
+    }
+    #assetChartContainer,
+    #liabilityChartContainer {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  

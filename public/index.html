@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./fav.png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="try2.css">
+    <title>PolariX - Personal Finance Manager</title>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <img src="./images/logo.png" alt="PolariX Logo">
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
+                    <li class="nav__item"><a href="#features" class="nav__link">Features</a></li>
+                    <li class="nav__item"><a href="#benefits" class="nav__link">Benefits</a></li>
+                    <li class="nav__item"><a href="#plans" class="nav__link">Plans</a></li>
+                    <li class="nav__item"><a href="signup.html" class="nav__link">Dashboard</a></li>
+                </ul>
+                <div class="nav__close" id="nav-close"><i class="ri-close-line"></i></div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle"><i class="ri-function-line"></i></div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="home section" id="home">
+            <video autoplay muted loop class="video-section__video">
+                <source src="./videos/background.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="home__container container grid">
+                <!-- <div class="home__logo">
+                    <img src="/img/logoremove.png" alt="PolariX Logo" class="home__logo-img">
+                </div> -->
+                <div class="home__data">
+                    <div class="home__header">
+                        <h1 class="home__title">PolariX</h1>
+                        <h2 class="home__subtitle">Your Money</h2>
+                    </div>
+                    <div class="home__footer">
+                        <h3 class="home__title-description">Overview</h3>
+                        <p class="home__description">Take control of your finances with PolariX. Track expenses, set budgets, and achieve your savings goals with an intuitive, all-in-one platform.</p>
+                        <a href="../signup.html" class="home__signup-button">
+                          <span class="button--flex">
+                              <i class="ri-arrow-right-line button__icon"></i> Let's Sign Up
+                          </span>
+                          <span class="home__price">Start Now</span>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials section" id="testimonials">
+            <h2 class="section__title">What Our Users Say</h2>
+            <div class="testimonial__container container">
+              <div class="testimonial__ratings">
+                <div class="rating__card">
+                  <div class="testimonials__rating">
+                    <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
+                  </div>
+                  <div class="rating__score">4.8<span>/5</span></div>
+                  <p class="testimonial__quote">"PolariX made budgeting a breeze."</p>
+                  <p class="testimonial__user">— Sarah K., Freelancer</p>
+                </div>
+                
+                <div class="rating__card">
+                  <div class="testimonials__rating">
+                    <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
+                  </div>
+                  <div class="rating__score">4.8<span>/5</span></div>
+                  <p class="testimonial__quote">"Real-time alerts keep me on track!"</p>
+                  <p class="testimonial__user">— James P., Small Business Owner</p>
+                </div>
+                
+                <!-- New third card -->
+                <div class="rating__card">
+                  <div class="testimonials__rating">
+                    <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                  </div>
+                  <div class="rating__score">5.0<span>/5</span></div>
+                  <p class="testimonial__quote">"The best finance tool I've ever used."</p>
+                  <p class="testimonial__user">— Michael R., Investor</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        <section class="sponsor section">
+            <div class="sponsor__container container grid">
+                <img src="./images/partner1.svg" alt="Partner 1" class="sponsor__img">
+                <img src="./images/partner2.png" alt="Partner 2" class="sponsor__img">
+                <img src="./images/partner3.png" alt="Partner 3" class="sponsor__img">
+                <img src="./images/partner4.png" alt="Partner 4" class="sponsor__img">
+            </div>
+        </section>
+
+        <section class="specs section grid features-section" id="features">
+            <video autoplay muted loop playsinline class="background-video">
+                <source src="./videos/feature.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h2 class="section__title-minty" id="features-title">Features</h2>
+            <div class="specs__container container grid">
+              <div class="specs__content-left">
+                <div class="specs__card">
+                  <i class="ri-line-chart-line specs__icon"></i>
+                  <h3 class="specs__title">Tracking</h3>
+                  <span class="specs__subtitle">Monitor expenses in real-time</span>
+                </div>
+                <div class="specs__card">
+                  <i class="ri-bank-line specs__icon"></i>
+                  <h3 class="specs__title">Sync</h3>
+                  <span class="specs__subtitle">Connect your bank accounts</span>
+                </div>
+              </div>
+              <div class="specs__image-wrapper">
+                <img src="./images/feature1.png" alt="PolariX Features" class="specs__img" />
+              </div>
+              <div class="specs__content-right">
+                <div class="specs__card">
+                  <i class="ri-wallet-line specs__icon"></i>
+                  <h3 class="specs__title">Budgeting</h3>
+                  <span class="specs__subtitle">Plan your spending easily</span>
+                </div>
+                <div class="specs__card">
+                  <i class="ri-notification-3-line specs__icon"></i>
+                  <h3 class="specs__title">Alerts</h3>
+                  <span class="specs__subtitle">Get spending notifications</span>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <section class="case section grid" id="benefits">
+            <h2 class="section__title section__title-gradient" data-aos="fade-up">Benefits</h2>
+            <div class="case__container container grid">
+              <div class="benefits__img-wrapper" data-aos="fade-right">
+                <img src="./images/benefits.png" alt="Financial Freedom" class="case__img floating-img benefits__img">
+              </div>
+              <div class="case__data" data-aos="fade-left">
+                <p class="case__description">
+                  <strong>Simplify</strong> your financial life with <span class="highlight">PolariX</span>. 
+                  Gain <strong>peace of mind</strong>, save more, and plan for the <span class="highlight">future</span> with confidence.
+                </p>
+                <a href="#" class="button button--flex">
+                  <i class="ri-information-line button__icon"></i> Learn More
+                </a>
+              </div>
+            </div>
+        </section>
+
+        <section class="discount section video-bg-wrapper">
+            <video autoplay muted loop playsinline class="bg-video">
+              <source src="./videos/discount.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="discount__container container grid">
+              <div class="discount__animate">
+                <h2 class="discount__title">Master Your <br> Finances Today</h2>
+                <p class="discount__description">Join now and start managing your money smarter.</p>
+                <a href="signup.html" class="home__signup-button">
+                  <i class="ri-arrow-right-line button__icon"></i> Let’s Sign Up
+                </a>
+              </div>
+              <img src="./images/discount.png" alt="PolariX Promotion" class="discount__img">
+            </div>
+        </section>
+
+        <section class="video-section" id="video">
+            <video class="video-section__video" autoplay muted loop>
+                <source src="./videos/2ndbackground.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-section__overlay"></div>
+            <h2 class="video-section__text">Budget Like a Boss!</h2>
+        </section>
+
+        <section class="products section" id="plans">
+            <h2 class="section__title section__title-gradient products__line">Choose <br> Your Plan</h2>
+            <div class="products__bg-effect"></div>
+            <div class="products__container container grid">
+                <article class="products__card">
+                    <div class="products__content">
+                        <img src="./images/basic.png" alt="Free Plan" class="products__img">
+                        <h3 class="products__title">30-Day Free Trial</h3>
+                        <span class="products__price">₹0/mo</span>
+                        <p class="products__features">Core budgeting<br>Basic expense tracking<br>Email support<br>basic Features</p>
+                        <button class="button button--flex products__button">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
+                    </div>
+                </article>
+                <article class="products__card">
+                    <div class="products__content">
+                        <img src="./images/plus.png" alt="Plus Plan" class="products__img">
+                        <h3 class="products__title">Plus</h3>
+                        <span class="products__price">₹749/mo</span>
+                        <p class="products__features">Advanced budgeting<br>Real-time sync<br>Priority support<br>Custom reports</p>
+                        <button class="button button--flex products__button">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
+                    </div>
+                </article>
+                <article class="products__card">
+                    <div class="products__content">
+                        <img src="./images/pro.png" alt="Pro Plan" class="products__img">
+                        <h3 class="products__title">Pro</h3>
+                        <span class="products__price">₹1499/mo</span>
+                        <p class="products__features">Full analytics<br>Multi-account sync<br>24/7 support<br>Expert advice</p>
+                        <button class="button button--flex products__button">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <a href="#" class="footer__logo"><img src="./images/logo.png" alt="PolariX Logo"></a>
+            <div class="footer__content">
+                <h3 class="footer__title">Features</h3>
+                <ul class="footer__links">
+                    <li><a href="#" class="footer__link">Budgeting</a></li>
+                    <li><a href="#" class="footer__link">Tracking</a></li>
+                    <li><a href="#" class="footer__link">Sync</a></li>
+                    <li><a href="#" class="footer__link">Alerts</a></li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">Support</h3>
+                <ul class="footer__links">
+                    <li><a href="#" class="footer__link">Help Center</a></li>
+                    <li><a href="signup.html" class="footer__link">Sign Up</a></li>
+                    <li><a href="#" class="footer__link">Updates</a></li>
+                    <li><a href="#" class="footer__link">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <form action="" class="footer__form">
+                    <input type="email" placeholder="Email" class="footer__input">
+                    <button class="button button--flex"><i class="ri-send-plane-line button__icon"></i> Subscribe</button>
+                </form>
+                <div class="footer__social">
+                    <a href="https://www.facebook.com/" target="_blank" class="footer__social-link"><i class="ri-facebook-fill"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" class="footer__social-link"><i class="ri-instagram-line"></i></a>
+                    <a href="https://twitter.com/" target="_blank" class="footer__social-link"><i class="ri-twitter-line"></i></a>
+                </div>
+            </div>
+        </div>
+        <p class="footer__copy"><a href="#" class="footer__copy-link">© 2025 PolariX. All rights reserved</a></p>
+    </footer>
+
+    <a href="#" class="scrollup" id="scroll-up"><i class="ri-arrow-up-s-line scrollup__icon"></i></a>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Botpress Chatbot Integration -->
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/04/08/11/20250408111319-36KMQ46P.js"></script>
+    <script>
+        /*=============== BOTPRESS CHATBOT INITIALIZATION ===============*/
+        window.botpressWebChat.init({
+            botName: "Polo",
+            primaryColor: "#4ed4c6", /* Matches PolariX minty blue */
+            textColor: "#0a100f", /* Matches PolariX text */
+            composerPlaceholder: "Ask Polo about your finances...",
+            position: { bottom: "30px", right: "30px" },
+            showPoweredBy: false,
+            welcomeMsg: "Hi, I’m Polo! Ready to manage your finances with PolariX?",
+            style: {
+                borderRadius: "15px",
+                width: "360px",
+                height: "520px",
+                backgroundColor: "#F9FAFB",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                header: { backgroundColor: "#4ed4c6", color: "#0a100f" }
+            },
+            enableTranscriptDownload: false,
+            showConversationsButton: false
+        });
+
+        /*=============== BOTPRESS CUSTOM CSS ===============*/
+        window.botpressWebChat.on('init', function() {
+            const style = document.createElement('style');
+            style.innerHTML = `
+                #bp-web-widget-container .bp-widget-web {
+                    font-family: 'Poppins', sans-serif !important;
+                    border: none !important;
+                }
+                #bp-web-widget-container .bp-header {
+                    background-color: #4ed4c6 !important;
+                    color: #0a100f !important;
+                    padding: 10px !important;
+                    border-top-left-radius: 15px !important;
+                    border-top-right-radius: 15px !important;
+                }
+                #bp-web-widget-container .bp-message-user .bp-message-content {
+                    background-color: #4ed4c6 !important;
+                    color: #0a100f !important;
+                    border-radius: 12px !important;
+                    padding: 8px 12px !important;
+                }
+                #bp-web-widget-container .bp-message-bot .bp-message-content {
+                    background-color: #FFFFFF !important;
+                    color: #333333 !important;
+                    border-radius: 12px !important;
+                    padding: 8px 12px !important;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+                }
+                #bp-web-widget-container .bp-composer {
+                    background-color: #FFFFFF !important;
+                    border-top: 1px solid #E5E7EB !important;
+                    padding: 10px !important;
+                }
+                #bp-web-widget-container .bp-composer textarea {
+                    border: 1px solid #D1D5DB !important;
+                    border-radius: 8px !important;
+                    padding: 8px !important;
+                    font-size: 14px !important;
+                }
+                #bp-web-widget-container .bp-powered {
+                    display: none !important;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+    <script>
+        /*=============== PRELOADER ===============*/
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+        });
+
+        /*=============== SHOW MENU ===============*/
+        const navMenu = document.getElementById('nav-menu'),
+              navToggle = document.getElementById('nav-toggle'),
+              navClose = document.getElementById('nav-close');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
+        }
+        if (navClose) {
+            navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
+        }
+
+        const navLink = document.querySelectorAll('.nav__link');
+        function linkAction() { navMenu.classList.remove('show-menu'); }
+        navLink.forEach(n => n.addEventListener('click', linkAction));
+
+        /*=============== CHANGE BACKGROUND HEADER ===============*/
+        function scrollHeader() {
+            const header = document.getElementById('header');
+            if (window.scrollY >= 50) {
+                header.classList.add('header__sticky');
+            } else {
+                header.classList.remove('header__sticky');
+            }
+        }
+        window.addEventListener('scroll', scrollHeader);
+
+        /*=============== SHOW SCROLL UP ===============*/
+        function scrollUp() {
+            const scrollUp = document.getElementById('scroll-up');
+            if (window.scrollY >= 200) scrollUp.classList.add('show-scroll');
+            else scrollUp.classList.remove('show-scroll');
+        }
+        window.addEventListener('scroll', scrollUp);
+
+        /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+        const sections = document.querySelectorAll('section[id]');
+        function scrollActive() {
+            const scrollY = window.pageYOffset;
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight,
+                      sectionTop = current.offsetTop - 50,
+                      sectionId = current.getAttribute('id');
+                const link = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
+                if (link) {
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        link.classList.add('active-link');
+                    } else {
+                        link.classList.remove('active-link');
+                    }
+                }
+            });
+        }
+        window.addEventListener('scroll', scrollActive);
+
+        /*=============== SCROLL REVEAL ANIMATION ===============*/
+        const sr = ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            delay: 400,
+            reset: true
+        });
+        sr.reveal(`.home__header, .section__title`, { delay: 600, origin: 'top' });
+        sr.reveal(`.home__footer`, { delay: 700, origin: 'bottom' });
+        sr.reveal(`.home__img`, { delay: 900, origin: 'right', distance: '100px' });
+        sr.reveal(`.sponsor__img, .products__card, .footer__logo, .footer__content, .footer__copy`, { origin: 'bottom', interval: 100 });
+        sr.reveal(`.specs__content-left, .discount__animate`, { origin: 'left', interval: 100 });
+        sr.reveal(`.specs__content-right`, { origin: 'right', interval: 100 });
+        sr.reveal(`.specs__img, .discount__img`, { origin: 'bottom', distance: '100px' });
+        sr.reveal(`.case__img`, { origin: 'top', distance: '100px' });
+        sr.reveal(`.case__data`, { origin: 'bottom' });
+        sr.reveal(`.testimonials__card`, { origin: 'bottom', interval: 100 });
+        sr.reveal(`.video-section__text`, { origin: 'bottom', delay: 600 });
+        sr.reveal(`.home__logo`, {
+            origin: 'left',
+            distance: '100px',
+            duration: 2000,
+            delay: 200,
+            opacity: 0,
+        });
+        sr.reveal(`.rating__card`, { origin: 'bottom', delay: 600 });
+        sr.reveal(`#features-title`, { delay: 600, origin: 'top' });
+
+        /*=============== PARALLAX SCROLL EFFECT ===============*/
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(el => {
+                let scrollPosition = window.pageYOffset;
+                el.style.backgroundPositionY = -(scrollPosition * 0.3) + 'px';
+            });
+
+            const images = document.querySelectorAll('.home__img, .specs__img, .case__img, .discount__img');
+            images.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const speed = 0.2;
+                if (rect.top < window.innerHeight) {
+                    img.style.transform = `translateY(${scrollPosition * speed}px) scale(${1 + scrollPosition * 0.0005})`;
+                    img.style.opacity = 1 - (rect.top / window.innerHeight) * 0.3;
+                }
+            });
+        });
+
+        /*=============== INTERACTIVE PLAN SELECTION ===============*/
+        const planCards = document.querySelectorAll('.products__card');
+        planCards.forEach(card => {
+            card.addEventListener('click', () => {
+                planCards.forEach(c => c.classList.remove('selected-plan'));
+                card.classList.add('selected-plan');
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        /*=============== FEATURE DESCRIPTION POPUP ===============*/
+        const featureData = document.querySelectorAll('.specs__data');
+        featureData.forEach(feature => {
+            feature.addEventListener('click', () => {
+                const title = feature.querySelector('.specs__title').textContent;
+                const subtitle = feature.querySelector('.specs__subtitle').textContent;
+                const popup = document.createElement('div');
+                popup.classList.add('feature-popup');
+                popup.innerHTML = `<h3>${title}</h3><p>${subtitle}</p>`;
+                document.body.appendChild(popup);
+                setTimeout(() => popup.remove(), 2000);
+            });
+        });
+
+        /*=============== SMOOTH SCROLL FOR BUTTONS ===============*/
+        const buttons = document.querySelectorAll('.button, .signup-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = button.closest('section').nextElementSibling || document.querySelector('#home');
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92c1642dff19b02f',t:'MTc0Mzk0MzYyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92f24d669a5f678c',t:'MTc0NDQ1NjQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

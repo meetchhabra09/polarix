@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolariX - Budget Like a Boss !</title>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  <link rel="stylesheet" href="dashboard.css">
+  <!-- For Exporting Transactions - Sheet.js -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- <script src="profile.js"></script> -->
+  <link rel="icon" type="image/png" href="./fav.png">
+  <link rel="stylesheet" href="./category.css">
+  
+  
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo"><img src='./fav.png' width="40px" height="40px"></div>
+      <div class="logo-text">PolariX</div>
+    </div>
+    
+    <div class="user-info">
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="user-name">John Doe</div>
+      <div class="user-role">Financial Director</div>
+    </div>
+    
+    
+    <ul class="nav-menu">
+      <li class="nav-item" id="nav-home">
+        <div class="nav-icon"><i class="fas fa-home"></i></div>
+        <div><a href="./index.html" style="color: #e2e8f0; text-decoration: none;">Home</a></div>
+      </li>
+      <li class="nav-item" id="nav-dashboard">
+        <div class="nav-icon"><i class="fas fa-chart-pie"></i></div>
+        <div>Dashboard</div>
+      </li>
+      <li class="nav-item" id="nav-my-profile">
+        <div class="nav-icon"><i class="fas fa-user"></i></div>
+        <div>My Profile</div>
+      </li>
+      <li class="nav-item" id="nav-category">
+        <div class="nav-icon"><i class="fas fa-list"></i></div>
+        <div>Categories</div>
+      </li>
+      <li class="nav-item" id="nav-transactions">
+        <div class="nav-icon"><i class="fas fa-exchange-alt"></i></div>
+        <div>Transactions</div>
+      </li>
+      <li class="nav-item" id="nav-goals">
+        <div class="nav-icon"><i class="fas fa-bullseye"></i></div>
+        <div>Goals</div>
+      </li>
+      <li class="nav-item" id="nav-assets">
+        <div class="nav-icon"><i class="fas fa-coins"></i></div>
+        <div>Assets</div>
+      </li>
+      <li class="nav-item" id="nav-income">
+        <div class="nav-icon"><i class="fas fa-hand-holding-usd"></i></div>
+        <div>Income</div>
+      </li>
+      <li class="nav-item" id="nav-liabilities">
+        <div class="nav-icon"><i class="fas fa-balance-scale"></i></div>
+        <div>Liabilities</div>
+      </li>
+      <li class="nav-item" id="nav-expenses">
+        <div class="nav-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div>Expenses</div>
+      </li>
+      <li class="nav-item" id="nav-reminder">
+        <div class="nav-icon"><i class="fas fa-bell"></i></div>
+        <div>Reminder</div>
+      </li>
+      <li class="nav-item" id="nav-calculator">
+        <div class="nav-icon"><i class="fas fa-calculator"></i></div>
+        <div >Calculator</div>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="main-content">
+    <!-- Dashboard Section (unchanged) -->
+    <div id="dashboard" class="dashboard-section" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Financial Dashboard</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>
+            <span id="currentDateDashboard"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeDashboard">0</div>
+          </div>
+        </div>
+      </div>
+
+
+      
+            <!-- ✅ TradingView Ticker -->
+      <div class="tradingview-widget-container" style="margin-bottom: 20px;">
+        <script type="text/javascript" async
+          src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+        {
+          "symbols": [
+            { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+            { "proName": "BSE:SENSEX", "title": "SENSEX" },
+            { "proName": "NASDAQ:NDX", "title": "NASDAQ" },
+            { "proName": "AMEX:SPY", "title": "S&P 500" }
+          ],
+          "colorTheme": "dark",
+          "isTransparent": true,
+          "displayMode": "adaptive",
+          "locale": "en"
+        }
+        </script>
+      </div>
+
+
+
+          
+
+
+      <div class="totals-card-container">
+        <div class="totals-card income-card">
+          <div class="totals-card-title">Total Income</div>
+          <div class="totals-card-value" id="totalIncomeCard">₹0</div>
+        </div>
+        <div class="totals-card expense-card">
+          <div class="totals-card-title">Total Expense</div>
+          <div class="totals-card-value" id="totalExpenseCard">₹0</div>
+        </div>
+        <div class="totals-card assets-card">
+          <div class="totals-card-title">Total Assets</div>
+          <div class="totals-card-value" id="totalAssetsCard">₹0</div>
+        </div>
+        <div class="totals-card liabilities-card">
+          <div class="totals-card-title">Total Liabilities</div>
+          <div class="totals-card-value" id="totalLiabilitiesCard">₹0</div>
+        </div>
+        <div class="totals-card savings-card">
+          <div class="totals-card-title">Total Savings</div>
+          <div class="totals-card-value" id="totalSavingsCard">₹0</div>
+        </div>
+        
+      </div>
+      <br>
+      <div class="dashboard chart-container">
+        
+        
+        
+        
+        <div class="card chart-card">
+          <div class="title">Income vs Expense</div>
+          <canvas id="incomeExpenseChart" class="canvas" width="400" ></canvas>
+        </div>
+        <div class="card chart-card">
+          <div class="title">Assets vs Liabilities</div>
+          <canvas id="assetsLiabilitiesChart" width="400"class="canvas" ></canvas>
+        </div>
+        <div class="card chart-card">
+          <div class="title">Total Savings</div>
+          <canvas id="savingsChart" width="400"class="canvas" ></canvas>
+        </div>
+        <!-- <div class="card chart-card dual-gauges"> -->
+          <!-- <div class="title">Goal & Finance Completion</div> -->
+          <div class="gauge-grid">
+            <!-- Goal Completion Gauge -->
+            <div class="gauge-container">
+              <div class="gauge-title">Goal Completion</div>
+              <div class="amount" id="goalStatsText">₹0 / ₹0</div>
+              <div class="gauge-wrapper">
+                <canvas id="goalCompletionGauge"></canvas>
+                <div class="center-label" id="goalGaugeText">0%</div>
+              </div>
+            </div>
+          
+            <!-- Savings Utilization Gauge -->
+            <!-- <div class="gauge-container">
+              <div class="gauge-title">Savings Utilization</div>
+              <div class="amount" id="assetStatsText">₹0 / ₹0</div>
+              <div class="gauge-wrapper">
+                <canvas id="assetLiabilityGauge"></canvas>
+                <div class="center-label" id="assetGaugeText">0%</div>
+              </div>
+            </div> -->
+            
+          </div>
+          
+          
+          <!-- </div> -->
+        <!-- </div> -->
+        <div class="gauge-grid">
+          <!-- Goal Completion Gauge -->
+          <div class="gauge-container">
+            <div class="gauge-title">Savings Utilization</div>
+            <div class="amount" id="assetStatsText">₹0 / ₹0</div>
+            <div class="gauge-wrapper">
+              <canvas id="assetLiabilityGauge"></canvas>
+              <div class="center-label" id="assetGaugeText">0%</div>
+            </div>
+          </div>
+        
+          <!-- Savings Utilization Gauge -->
+          
+          
+        </div>
+                
+      
+        
+        <div class="card chart-card wide-chart">
+          <div class="title">Income & Expense Trend</div>
+          <canvas id="incomeExpenseLineChart" class="wide-chart-canvas canvas"></canvas>
+        </div>
+
+        
+      </div>
+      
+      
+
+    </div>
+    
+    <!-- Tabs Container (unchanged) -->
+    <div id="my-profile-tabs" class="tabs-container" style="display: flex;">
+      <div class="tab active" id="tab-my-profile">
+        <div class="tab-icon"><i class="fas fa-user"></i></div>
+        <div>My Profile</div>
+      </div>
+      <div class="tab" id="tab-transactions">
+        <div class="tab-icon"><i class="fas fa-exchange-alt"></i></div>
+        <div>Transactions</div>
+      </div>
+      <div class="tab" id="tab-goals">
+        <div class="tab-icon"><i class="fas fa-bullseye"></i></div>
+        <div>Goals</div>
+      </div>
+      <div class="tab" id="tab-assets">
+        <div class="tab-icon"><i class="fas fa-coins"></i></div>
+        <div>Assets</div>
+      </div>
+      <div class="tab" id="tab-income">
+        <div class="tab-icon"><i class="fas fa-hand-holding-usd"></i></div>
+        <div>Income</div>
+      </div>
+      <div class="tab" id="tab-liabilities">
+        <div class="tab-icon"><i class="fas fa-balance-scale"></i></div>
+        <div>Liabilities</div>
+      </div>
+      <div class="tab" id="tab-expenses">
+        <div class="tab-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div>Expenses</div>
+      </div>
+
+      <!-- Add this inside the .tabs-container -->
+      <div class="tab" id="tab-calculator">
+        <div class="tab-icon"><i class="fas fa-calculator"></i></div>
+        <div>EMI & Tax Calculator</div>
+      </div>
+      
+    </div>
+    
+    <!-- My Profile Section -->
+    <div class="form-container" id="my-profile" style="display: block;">
+      <div class="form-header">
+        <div class="form-title">Personal Information & Risk Profile</div>
+        <div class="form-header-buttons">
+          <button class="save-button" id="saveProfileBtn">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">First Name<span class="required">*</span></label>
+          <input type="text" class="form-control" id="firstName" value="" placeholder="Aman">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gender<span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="male" name="gender" checked>
+              <label for="male">Male</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="female" name="gender">
+              <label for="female">Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Middle Name</label>
+          <input type="text" class="form-control" id="middleName">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Marital Status<span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="single" name="marital" checked>
+              <label for="single">Single</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="married" name="marital">
+              <label for="married">Married</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name<span class="required">*</span></label>
+          <input type="text" class="form-control" id="lastName" value="" placeholder="Kumar">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date of Birth<span class="required">*</span></label>
+          <input type="date" class="form-control" id="dateOfBirth" value="">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Occupation<span class="required">*</span></label>
+          <select class="form-select" id="occupation">
+            <option>Financial Director</option>
+            <option>Business Owner</option>
+            <option>Employed</option>
+            <option>Self-Employed</option>
+            <option>Retired</option>
+            <option>Student</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number<span class="required">*</span></label>
+          <input type="tel" class="form-control" id="phoneNumber" value="" maxlength="10">
+        </div>
+        <div class="form-group">
+          <label class="form-label">City<span class="required">*</span></label>
+          <input type="text" class="form-control" id="city" value="" placeholder="Chandigarh">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email<span class="required">*</span></label>
+          <input type="email" class="form-control" id="email" value="" placeholder="aman@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Income Stability<span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="income-unpredictable" name="income" value="unpredictable">
+              <label for="income-unpredictable">Unpredictable</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="income-stable" name="income" value="stable">
+              <label for="income-stable">Stable</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Investment %<span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="investment-low" name="investment" value="low">
+              <label for="investment-low">0-15%</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="investment-high" name="investment" value="high">
+              <label for="investment-high">15%+</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Risk Appetite<span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="appetite-low" name="appetite" value="low">
+              <label for="appetite-low">Low</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="appetite-high" name="appetite" value="high">
+              <label for="appetite-high">High</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction Section -->
+    <div class="form-container" id="transactions" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Transactions</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateTransactions"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeTransactions">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Add New Transaction</div>
+        <div class="form-header-buttons">
+          <button class="save-button" id="saveTransactionBtn">
+            <i class="fas fa-save"></i> Save
+          </button>
+          <button class="action-button" id="addCategoryBtn">Add Category</button>
+          <button class="action-button" id="addAccountBtn">Add Account</button>
+          <button class="action-button" id="exportExcelBtn">Export to Excel</button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Category<span class="required">*</span></label>
+          <select class="form-control" id="transactionCategory" onchange="updateSubcategory()">
+            <option value="">Select Category</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subcategory<span class="required">*</span></label>
+          <select class="form-control" id="transactionSubcategory">
+            <option value="">Select Subcategory</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amount<span class="required">*</span></label>
+          <input type="number" class="form-control" id="transactionAmount" placeholder="Enter amount" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Account<span class="required">*</span></label>
+          <select class="form-control" id="transactionAccount">
+            <option value="">Select Account</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date<span class="required">*</span></label>
+          <input type="date" class="form-control" id="transactionDate" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description<span class="required"></span></label>
+          <input type="text" class="form-control" id="transactionDescription" placeholder="Enter description">
+        </div>
+      </div>
+      <div class="transaction-list">
+        <h3>Transaction History</h3>
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Subcategory</th>
+              <th>Account</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="transactionTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+   <!-- Pop for Add Category Button -->
+   <div id="addCategoryPopup" class="popup">
+    <div class="popup-content">
+      <span class="close-btn" id="closeAddPopupBtn">×</span>
+      <h3>Add or Edit Category</h3>
+      <div class="form-group">
+        <label class="form-label">Category<span class="required">*</span></label>
+        <select id="categoryTypeSelect" class="form-control">
+          <option value="">-- Select Category --</option>
+          <option value="new">+ Create New</option>
+          <!-- Dynamically populate existing categories -->
+        </select>
+      </div>
+  
+      <div id="newCategoryInputGroup" class="form-group" style="display:none;">
+        <label class="form-label">New Category Name</label>
+        <input type="text" class="form-control" id="newCategoryName" placeholder="Enter new category name">
+      </div>
+  
+      <div id="subcategoryContainer" class="form-group">
+        <label class="form-label">Subcategories</label>
+        <div id="subcategoryFields">
+          <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory">
+        </div>
+        <button class="action-button" id="addSubcategoryBtn">+ Add More Subcategory</button>
+      </div>
+  
+      <button class="save-button" id="saveNewCategoryBtn">Save</button>
+      <br>
+      <button class="delete-button" id="deleteCategoryBtn">Delete</button>
+    </div>
+  </div>
+
+    <!-- Pop-up for Add Account (unchanged) -->
+    <div id="addAccountPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" id="closeAccountPopupBtn">×</span>
+        <h3>Add New Account</h3>
+        <div class="form-group">
+          <label class="form-label">Account Name<span class="required">*</span></label>
+          <input type="text" class="form-control" id="newAccountName" placeholder="Enter account name" required>
+        </div>
+        <button class="save-button" id="saveNewAccountBtn">Save</button>
+      </div>
+    </div>
+
+    <!-- Edit Transaction Popup (unchanged) -->
+    <div id="editTransactionPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" id="cancelEditTransactionBtn">×</span>
+        <h3>Edit Transaction</h3>
+        <form id="editTransactionForm">
+          <div class="form-group">
+            <label class="form-label">Amount (₹)<span class="required">*</span></label>
+            <input type="number" class="form-control" id="editTransactionAmount" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date<span class="required">*</span></label>
+            <input type="date" class="form-control" id="editTransactionDate" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" id="editTransactionDescription">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category<span class="required">*</span></label>
+            <select class="form-select" id="editTransactionCategory" required>
+              <option value="">Select Category</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subcategory</label>
+            <select class="form-select" id="editTransactionSubcategory">
+              <option value="">Select Subcategory</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Account<span class="required">*</span></label>
+            <select class="form-select" id="editTransactionAccount" required>
+              <option value="">Select Account</option>
+            </select>
+          </div>
+          <button type="submit" class="save-button" id="saveEditedTransactionBtn">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Overlay for popup (unchanged) -->
+    <!-- <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div> -->
+
+    <!-- Assets Section -->
+    <div class="form-container" id="assets" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Assets</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateAssets"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeAssets">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Assets</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="assets">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Mutual Fund</label>
+          <input type="number" class="form-control" placeholder="Enter mutual fund amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Equity</label>
+          <input type="number" class="form-control" placeholder="Enter equity amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">PPF</label>
+          <input type="number" class="form-control" placeholder="Enter PPF amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">EPF</label>
+          <input type="number" class="form-control" placeholder="Enter EPF amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">NPS</label>
+          <input type="number" class="form-control" placeholder="Enter NPS amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Real Estate, Gold & Others</label>
+          <input type="number" class="form-control" placeholder="Enter real estate, gold & others amount">
+        </div>
+      </div>
+    </div>
+
+  <!-- Goals Section -->
+    <div class="form-container" id="goals" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Goals</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateGoals"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeGoals">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Goals & Insurance</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="goals">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button" >
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+
+      <div class="total-income totals-card income-card" style="margin: 20px 0; font-size: 18px; color: #fff;">
+        <label class="totals-card-title"><strong>Total Goals Savings Amount:</strong> ₹<span id="totalGoalsAmount">0.00</span></label>
+        
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Child's Education</label>
+          <input type="number" class="form-control" placeholder="Enter child's education amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Child's Marriage</label>
+          <input type="number" class="form-control" placeholder="Enter child's marriage amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Retirement</label>
+          <input type="number" class="form-control" placeholder="Enter retirement amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Car & Home</label>
+          <input type="number" class="form-control" placeholder="Enter car & home amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vacation</label>
+          <input type="number" class="form-control" placeholder="Enter vacation amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parents' Support</label>
+          <input type="number" class="form-control" placeholder="Enter parents' support amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Other Goals</label>
+          <input type="number" class="form-control" placeholder="Enter other goals amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Life Insurance</label>
+          <input type="number" class="form-control" placeholder="Enter life insurance amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Health Insurance</label>
+          <input type="number" class="form-control" placeholder="Enter health insurance amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Motor Insurance</label>
+          <input type="number" class="form-control" placeholder="Enter motor insurance amount">
+        </div>
+      </div>
+    </div>
+
+  <!-- Income Section -->
+    <div class="form-container" id="income" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Income</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateIncome"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeIncome">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="total-income totals-card income-card" style="margin: 20px 0; font-size: 18px; color: #fff;">
+        <label class="totals-card-title"><strong>Total Income:</strong> ₹<span id="totalIncomeAmount">0.00</span></label>
+        <select id="incomePeriod" class="period-button" style="margin-left: 10px; padding: 5px;">
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Income Details</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="income">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Monthly Salary<span class="required">*</span></label>
+          <input type="number" class="form-control" placeholder="Enter monthly salary">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Freelance Income</label>
+          <input type="number" class="form-control" placeholder="Enter freelance income">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Investment Income</label>
+          <input type="number" class="form-control" placeholder="Enter investment income">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Other Income</label>
+          <input type="number" class="form-control" placeholder="Enter other income">
+        </div>
+      </div>
+    </div>
+
+    <!-- Liabilities Section -->
+    <div class="form-container" id="liabilities" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Liabilities</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateLiabilities"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeLiabilities">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Liabilities Details</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="liabilities">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Home Loan</label>
+          <input type="number" class="form-control" placeholder="Enter home loan amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Car Loan</label>
+          <input type="number" class="form-control" placeholder="Enter home loan EMI">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Personal Loan</label>
+          <input type="number" class="form-control" placeholder="Enter home loan tenure">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Educational Loan</label>
+          <input type="number" class="form-control" placeholder="Enter other liabilities amount">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Other Liabilities</label>
+          <input type="number" class="form-control" placeholder="Enter other liabilities EMI">
+        </div>
+      </div>
+    </div>
+
+    <!-- Expenses Section -->
+    <div class="form-container" id="expenses" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Expenses</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateExpenses"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeExpenses">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-header">
+        <div class="form-title">Expenses</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="expenses">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Household</label>
+          <input type="number" class="form-control" placeholder="Enter household expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Rental</label>
+          <input type="number" class="form-control" placeholder="Enter rental expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lifestyle</label>
+          <input type="number" class="form-control" placeholder="Enter lifestyle expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Travel</label>
+          <input type="number" class="form-control" placeholder="Enter travel expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Child & Parents</label>
+          <input type="number" class="form-control" placeholder="Enter child & parents expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Holiday</label>
+          <input type="number" class="form-control" placeholder="Enter holiday expenses">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Medical</label>
+          <input type="number" class="form-control" placeholder="Enter medical expenses">
+        </div>
+      </div>
+    </div>
+
+  <!-- Category Section -->
+  <div class="form-container" id="category" style="display: block;">
+    <div class="top-bar">
+      <div class="page-title">Categories</div>
+      <div style="display: flex; align-items: center;">
+        <div class="date-selector">
+          <i class="fas fa-calendar"></i>  
+          <span id="currentDateCategory"></span>
+        </div>
+        <div class="notifications">
+          <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+          <div class="notification-badge" id="notificationBadgeCategory">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-header">
+      <!-- <div class="form-title">Categories</div>
+      <div class="form-header-buttons">
+        <button class="save-button">
+          <i class="fas fa-save"></i> Save
+        </button>
+      </div> -->
+    </div>
+    <div class="chart-row-category">
+      <div class="chart-container-category">
+        <canvas id="incomeBarChart" class="canvas-category"></canvas>
+      </div>
+      <div class="chart-container-category" id="assetChartContainer">
+        <canvas id="assetPieChart" class="canvas-category"></canvas>
+        <div class="table-container" id="assetTableContainer"></div>
+      </div>
+    </div>
+    <div class="chart-row-category">
+      <div class="chart-container-category">
+        <canvas id="expenseBarChart" class="canvas-category"></canvas>
+      </div>
+      <div class="chart-container-category" id="liabilityChartContainer">
+        <canvas id="liabilityPieChart" class="canvas-category"></canvas>
+        <div class="table-container" id="liabilityTableContainer"></div>
+      </div>
+    </div>
+  </div>
+
+      
+  
+
+
+    <div class="form-container" id="calculator" style="display: flex;">
+      <div class="top-bar">
+        <div class="page-title">EMI & Tax Calculator</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateCalculator"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeCalculator">0</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="calculator-wrapper" style="display: flex; justify-content: space-around;">
+          <div class="calculator-card">
+            <div class="form-header ">
+              <div class="form-title ">EMI Calculator</div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" id="loanAmount" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Interest Rate (%)</label>
+                <input type="number" id="interestRate" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tenure (Years)</label>
+                <input type="number" id="tenure" class="form-control" />
+              </div>
+              <div class="form-group">
+                <button onclick="calculateEMI()" class="calculator-button">Calculate EMI</button>
+              </div>
+              <div class="form-group result">
+                <p><strong>EMI:</strong> ₹<span id="emiResult">0.00</span></p>
+                <p><strong>Total Payable:</strong> ₹<span id="totalAmountResult">0.00</span></p>
+                <p><strong>Interest:</strong> ₹<span id="totalInterestResult">0.00</span></p>
+              </div>
+            </div>
+          </div>
+        <div class="calculator-card">
+          <div class="form-header">
+            <div class="form-title">Tax Calculator</div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Annual Income (₹)</label>
+              <input type="number" id="taxIncome" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tax Regime</label>
+              <select id="taxRegime" class="form-select">
+                <option value="new">New</option>
+                <option value="old">Old</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Assessment Year</label>
+              <select id="taxYear" class="form-select">
+                <option value="2025">2025-26</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button onclick="calculateTax()" class="calculator-button">Calculate Tax</button>
+            </div>
+            <div class="form-group">
+              <p><strong>Estimated Tax:</strong> ₹<span id="taxResult">0.00</span></p>
+              <!-- <p><strong>Tax Rate:</strong><span id="taxrate">0.00</span>%</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- Popup for New Fields (Add this anywhere in your HTML if not present) -->
+      <!-- <div id="addFieldPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; z-index: 1000;">
+        <input id="newFieldLabel" type="text" placeholder="Enter field label">
+        <button id="saveNewFieldBtn">Save</button>
+        <button id="closeFieldPopupBtn">Close</button>
+        </div> -->
+
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+        
+        <!-- Reminder Section -->
+        <div class="form-container" id="reminder" style="display: none;">
+          <div class="top-bar">
+            <div class="page-title">Reminder</div>
+            <div style="display: flex; align-items: center;">
+              <div class="date-selector">
+                <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+                <span id="currentDateReminder"></span>
+              </div>
+              <div class="notifications">
+                <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+                <div class="notification-badge" id="notificationBadgeReminder">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-header">
+            <div class="form-title">Reminders</div>
+            <div class="form-header-buttons">
+              <button class="new-button" data-section="reminder">
+                <i class="fas fa-plus"></i> New
+              </button>
+              <button class="save-button" id="saveReminder">
+                <i class="fas fa-save"></i> Save
+              </button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Reminder Title</label>
+              <input type="text" class="form-control" id="reminderTitle" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Due Date</label>
+              <input type="date" class="form-control" id="reminderDate">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Priority</label>
+              <select class="form-select" id="reminderPriority">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Notes</label>
+              <input type="text" class="form-control" id="reminderNotes" placeholder="Enter notes">
+            </div>
+          </div>
+        </div>
+
+        <!-- New Field Popup -->
+        <div id="addFieldPopup" class="popup" style="display: none;">
+          <div class="popup-content">
+            <span class="close-btn" id="closeFieldPopupBtn">×</span>
+            <h3>Add New Field</h3>
+            <form id="addFieldForm">
+              <div class="form-group">
+                <input type="text" id="newFieldLabel" class="form-control" placeholder="Enter field label" required>
+              </div>
+              <button type="button" class="save-button" id="saveNewFieldBtn">Add</button>
+            </form>
+          </div>
+        </div>
+   
+        
+  </div>
+
+
+  <!-- Notification Sidebar (unchanged) -->
+  <div class="notification-sidebar" id="notificationSidebar">
+    <button class="close-btn" id="closeSidebar">×</button>
+    <h3>Notifications</h3>
+    <ul class="notification-list" id="notificationList">
+      <li>No reminders for today</li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <script src="./js/dashboard.js"></script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/calculator.js"></script>
+  <script src="./js/category.js"></script>
+</body>
+</html>
