@@ -16,13 +16,8 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure, random key in production
 
 // Middleware
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://polarix-678.vercel.app.vercel.app"
-];
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: "https://polarix-678.vercel.app.vercel.app",
   credentials: true
 }));
 app.use(bodyParser.json());
