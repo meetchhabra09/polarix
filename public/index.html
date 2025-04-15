@@ -200,7 +200,7 @@
                         <h3 class="products__title">Plus</h3>
                         <span class="products__price">₹749/mo</span>
                         <p class="products__features">Advanced budgeting<br>Real-time sync<br>Priority support<br>Custom reports</p>
-                        <button class="button button--flex products__button">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
+                        <button class="button button--flex products__button" onclick="payNow(749, 'Plus Plan')">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
                     </div>
                 </article>
                 <article class="products__card">
@@ -209,7 +209,7 @@
                         <h3 class="products__title">Pro</h3>
                         <span class="products__price">₹1499/mo</span>
                         <p class="products__features">Full analytics<br>Multi-account sync<br>24/7 support<br>Expert advice</p>
-                        <button class="button button--flex products__button">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
+                        <button class="button button--flex products__button" onclick="payNow(1499, 'Pro Plan')">Get Started <i class="ri-arrow-right-line button__icon"></i></button>
                     </div>
                 </article>
             </div>
@@ -469,7 +469,34 @@
             });
         });
     </script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92c1642dff19b02f',t:'MTc0Mzk0MzYyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92f24d669a5f678c',t:'MTc0NDQ1NjQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>
+        function payNow(amount, planName) {
+          const options = {
+            key: "rzp_test_tpLaryLcuY5qDu", // 🔁 Replace with your Razorpay test/live key
+            amount: amount * 100, // Convert to paise
+            currency: "INR",
+            name: "PolariX",
+            description: `Subscription: ${planName}`,
+            image: "./fav.png", // Your logo
+            handler: function (response) {
+              alert(`🎉 Payment successful!\nPayment ID: ${response.razorpay_payment_id}`);
+              // Optionally, store response via fetch('/api/payment-confirm', ...)
+            },
+            prefill: {
+              name: "PolariX User",
+              email: "user@example.com", // replace with user email if logged in
+              contact: "9999999999"
+            },
+            theme: {
+              color: "#38b2ac"
+            }
+          };
+          const razor = new Razorpay(options);
+          razor.open();
+        }
+      </script>
 </body>
 </html>
