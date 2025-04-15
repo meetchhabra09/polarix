@@ -532,7 +532,7 @@
     <script src="./js/signup.js"></script>
     <script>
         function handleCredentialResponse(response) {
-          fetch("https://polarix-backend.onrender.com/api/auth/google", {
+          fetch("https://polarix-back.onrender.com/api/auth/google", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ credential: response.credential })
