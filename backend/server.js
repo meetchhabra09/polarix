@@ -17,7 +17,7 @@ const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure, random key i
 
 // Middleware
 app.use(cors({
-  origin: "https://polarix-678.vercel.app.vercel.app",
+  origin: "https://polarix-678.vercel.app",
   credentials: true
 }));
 app.use(bodyParser.json());
