@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Bull</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #facc15;
+      font-size: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 2px;
+    }
+    h1 img {
+      height: 40px;
+    }
+    p {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 18px;
+      margin-top: -10px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .chart-box {
+      flex: 2;
+      min-width: 680px;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #0f172a;
+      box-shadow: 0 0 20px #38b2ac40;
+    }
+    .sidebar {
+      flex: 1;
+      min-width: 260px;
+      padding: 20px;
+      background: #1e293b;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #33415560;
+    }
+    .price-box {
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      border: none;
+      color: white;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 17px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn.up {
+      background: #38b2ac;
+    }
+    .btn.down {
+      background: #ef4444;
+    }
+    .btn:disabled {
+      background-color: #475569;
+      cursor: not-allowed;
+    }
+    .result, .scoreboard, .locked-price {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    .scoreboard div {
+      margin-top: 8px;
+    }
+    .scoreboard strong {
+      font-size: 18px;
+    }
+    .scoreboard {
+      text-align: center;
+    }
+    #timer {
+      font-size: 26px;
+      margin-top: 10px;
+      color: #eab308;
+    }
+    .flash-win {
+      animation: flashGreen 0.6s;
+    }
+    .flash-loss {
+      animation: flashRed 0.6s;
+    }
+    @keyframes flashGreen {
+      from { background-color: #166534; }
+      to { background-color: transparent; }
+    }
+    @keyframes flashRed {
+      from { background-color: #7f1d1d; }
+      to { background-color: transparent; }
+    }
+  </style>
+  <link rel="stylesheet" href="try2.css"> <!-- Optional: use index.css styling -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+</head>
+<body>
+  <header class="header" id="header" style="background-color: #0f172a;">
+    <nav class="nav container" style="display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" class="nav__logo">
+        <img src="./images/logo.png" alt="PolariX Logo" style="height: 40px;">
+      </a>
+      <button onclick="window.location.href='index.html'" style="
+        padding: 10px 20px;
+        background-color: #4ed4c6;
+        border: none;
+        border-radius: 8px;
+        color: #0f172a;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer;
+      ">← Back to Home</button>
+    </nav>
+  </header>
+  <br><br><br><br>
+  
+    <div><h1>
+        <img src="https://img.pikbest.com/png-images/20240918/angry-bull-head-fierce-aggressive-face-vector_10856593.png!w700wp" alt="Bull Head">
+        STOCK BULL
+      </h1>
+        <div class="tradingview-widget-container" style="margin: 10px auto; text-align: center;">
+            <div id="livePriceWidget"></div>
+        </div>
+    </div>
+  <p>Predict market moves. Win virtual money. Rule the bull.</p>
+<br>
+<div class="tradingview-widget-container" style="margin-bottom: 20px;">
+    <script type="text/javascript" async
+      src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+    {
+      "symbols": [
+        { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+        { "proName": "BSE:SENSEX", "title": "SENSEX" },
+        { "proName": "NASDAQ:NDX", "title": "NASDAQ" },
+        { "proName": "AMEX:SPY", "title": "S&P 500" }
+      ],
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "locale": "en"
+    }
+    </script>
+  </div>
+  <div class="container">
+    <!-- Chart and Selector -->
+    <div class="chart-box">
+      <div style="margin: 10px 0; text-align: center;">
+        <label for="mainStockSelect" style="margin-right: 10px; font-weight: 600;">📈 Select Stock:</label>
+        <select id="mainStockSelect" onchange="changeMainChart()"
+          style="padding: 8px 12px; border-radius: 6px; background-color: #1e293b; color: #f8fafc; border: none;">
+          <option value="NASDAQ:AAPL" selected>Apple (AAPL)</option>
+          <!-- <option value="NSE:TCS">TCS (NSE)</option> -->
+          <!-- <option value="NSE:RELIANCE">Reliance (NSE)</option> -->
+          <option value="NASDAQ:TSLA">Tesla (TSLA)</option>
+          <option value="NASDAQ:GOOG">Google (GOOG)</option>
+          <option value="NASDAQ:AMZN">Amazon (AMZN)</option>
+          <!-- <option value="NSE:HDFCBANK">HDFC Bank (NSE)</option> -->
+          <!-- <option value="NSE:INFY">Infosys (NSE)</option> -->
+        </select>
+        <!-- Live price widget from TradingView -->
+
+  
+      </div>
+      
+      <iframe id="chartFrame"
+        src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ:AAPL&interval=1&theme=dark&style=3&timezone=Etc/UTC&hidelegend=1&withdateranges=1&studies=[]&locale=en"
+        width="100%" height="400" frameborder="0" allowtransparency="true" scrolling="no">
+      </iframe>
+    </div>
+    
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <select id="difficultySelect">
+        <option value="10">🟢 Easy (10s)</option>
+        <option value="5" selected>🟡 Medium (5s)</option>
+        <option value="3">🔴 Hard (3s)</option>
+      </select>
+
+      <div class="price-box">
+        Live Price: ₹<span id="price">Loading...</span><br>
+        <div id="timer"></div>
+      </div>
+
+      <button class="btn up" id="upBtn" onclick="predict('up')">▲ Predict UP</button>
+      <button class="btn down" id="downBtn" onclick="predict('down')">▼ Predict DOWN</button>
+
+      <div class="locked-price" id="lockedPriceBox"></div>
+      <div class="result" id="resultBox">Make a prediction to start!</div>
+
+      <div class="scoreboard">
+        <div><strong style="color:#38b2ac;">Wallet:</strong> ₹<span id="balance">10000</span></div>
+        <div><strong style="color:#22c55e;">✔ Wins:</strong> <span id="wins">0</span></div>
+        <div><strong style="color:#ef4444;">✘ Losses:</strong> <span id="losses">0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let simulatedPrice = 120.00;
+    let balance = 10000;
+    let wins = 0;
+    let losses = 0;
+    let gameInProgress = false;
+    let prediction = null;
+
+    const priceEl = document.getElementById('price');
+    const resultBox = document.getElementById('resultBox');
+    const timerEl = document.getElementById('timer');
+    const lockedPriceBox = document.getElementById('lockedPriceBox');
+
+    const TWELVE_API_KEY = 'b542c38b693d497ca7ceecf13ca3788c'; // Replace with your actual Twelve Data API key
+
+    async function fetchPrice() {
+  const selectedSymbol = document.getElementById("mainStockSelect").value;
+  const fallbackChange = (Math.random() * 2 - 1).toFixed(2);
+
+  try {
+    const res = await fetch(`https://api.stockbull.live/price?symbol=${selectedSymbol}`);
+    const data = await res.json();
+    if (data && data.price) {
+      simulatedPrice = parseFloat(data.price);
+      priceEl.textContent = simulatedPrice.toFixed(2);
+      return simulatedPrice;
+    }
+  } catch (err) {
+    console.warn("Using fallback price change.");
+  }
+
+  // Fallback (simulate if fetch fails)
+  simulatedPrice += parseFloat(fallbackChange);
+  priceEl.textContent = simulatedPrice.toFixed(2);
+  return simulatedPrice;
+}
+
+
+
+function changeMainChart() {
+  const selectedSymbol = document.getElementById("mainStockSelect").value;
+  document.getElementById("chartFrame").src =
+    `https://s.tradingview.com/widgetembed/?symbol=${selectedSymbol}&interval=1&theme=dark&style=3&timezone=Etc/UTC&hidelegend=1&withdateranges=1&studies=[]&locale=en`;
+
+  updatePriceWidget(selectedSymbol); // update price display
+}
+
+
+function updatePriceWidget(symbol) {
+  const container = document.getElementById("livePriceWidget");
+  container.innerHTML = ''; // Clear old widget
+
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+  script.async = true;
+
+  script.innerHTML = JSON.stringify({
+    symbol: symbol,
+    width: "100%",
+    height: "80",
+    locale: "en",
+    dateRange: "1D",
+    colorTheme: "dark",
+    trendLineColor: "rgba(41, 98, 255, 1)",
+    underLineColor: "rgba(41, 98, 255, 0.3)",
+    isTransparent: true,
+    autosize: true
+  });
+
+  container.appendChild(script);
+}
+
+   
+
+
+async function predict(direction) {
+  if (gameInProgress) return;
+
+  prediction = direction;
+  gameInProgress = true;
+
+  document.getElementById('upBtn').disabled = true;
+  document.getElementById('downBtn').disabled = true;
+
+  const difficulty = parseInt(document.getElementById('difficultySelect').value);
+  timerCountdown(difficulty);
+
+  // ✅ Lock price
+  const lockedPrice = await fetchPrice();
+  lockedPriceBox.innerHTML = `🔒 Locked at: ₹${lockedPrice.toFixed(2)}`;
+  resultBox.textContent = "⏳ Prediction locked. Waiting...";
+
+  // ⏳ Wait for countdown
+  setTimeout(async () => {
+    // ✅ Get new price after wait
+    const newPrice = await fetchPrice();
+
+    const wentUp = newPrice > lockedPrice;
+    const correct = (prediction === 'up' && wentUp) || (prediction === 'down' && !wentUp);
+
+    if (correct) {
+      balance += 1000;
+      wins++;
+      resultBox.textContent = `✅ Correct! ₹${lockedPrice.toFixed(2)} → ₹${newPrice.toFixed(2)}. +₹1000`;
+      document.body.classList.add('flash-win');
+    } else {
+      balance -= 1000;
+      losses++;
+      resultBox.textContent = `❌ Wrong! ₹${lockedPrice.toFixed(2)} → ₹${newPrice.toFixed(2)}. -₹1000`;
+      document.body.classList.add('flash-loss');
+    }
+
+    updateScore();
+    gameInProgress = false;
+    document.getElementById('upBtn').disabled = false;
+    document.getElementById('downBtn').disabled = false;
+
+    setTimeout(() => {
+      document.body.classList.remove('flash-win', 'flash-loss');
+    }, 600);
+  }, difficulty * 1000);
+}
+
+    function timerCountdown(seconds) {
+      let count = seconds;
+      timerEl.textContent = `⏳ ${count}s`;
+      const interval = setInterval(() => {
+        count--;
+        timerEl.textContent = count > 0 ? `⏳ ${count}s` : '';
+        if (count <= 0) clearInterval(interval);
+      }, 1000);
+    }
+
+    function updateScore() {
+      document.getElementById('balance').textContent = balance;
+      document.getElementById('wins').textContent = wins;
+      document.getElementById('losses').textContent = losses;
+    }
+    updatePriceWidget(document.getElementById("mainStockSelect").value);
+
+    // Start simulation
+    fetchPrice();
+    setInterval(fetchPrice, 5000);
+
+
+  </script>
+
+</body>
+</html>

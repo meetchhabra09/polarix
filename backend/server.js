@@ -1,6 +1,9 @@
 const { OAuth2Client } = require('google-auth-library');
 const googleClient = new OAuth2Client("562166999915-35gr94lrk1ui7nmljshk9paoigppe690.apps.googleusercontent.com");
 
+const XLSX = require('xlsx');
+const fs = require('fs');
+
 
 
 const express = require('express');
@@ -50,7 +53,36 @@ mongoose.connection.on('connected', async () => {
   await Category.createIndexes();
   await Account.createIndexes();
   console.log('Indexes ensured');
+  await createDummyExcelForAllUsers(); 
 });
+
+async function createDummyExcelForAllUsers() {
+  const users = await User.find({});
+  const folderPath = path.join(__dirname, 'dummy_data');
+  if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath);
+
+  for (const user of users) {
+    const filePath = path.join(folderPath, `${user._id}.xlsx`);
+    if (!fs.existsSync(filePath)) {
+      const dummyData = [
+        { amount: 5000, date: '2025-04-01', description: 'Salary', category: 'Income', subcategory: 'Salary', account: 'Bank' },
+        { amount: 200, date: '2025-04-02', description: 'Snacks', category: 'Expense', subcategory: 'Food', account: 'Cash' },
+        { amount: 1500, date: '2025-04-03', description: 'Mutual Fund', category: 'Asset', subcategory: 'Investments', account: 'Bank' },
+        { amount: 10000, date: '2025-04-04', description: 'EMI', category: 'Liability', subcategory: 'Loan', account: 'Credit Card' }
+      ];
+
+      const worksheet = XLSX.utils.json_to_sheet(dummyData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Transactions');
+      XLSX.writeFile(workbook, filePath);
+
+      console.log(`✅ Dummy Excel created for user: ${user.username}`);
+    } else {
+      console.log(`✔️ Excel already exists for user: ${user.username}`);
+    }
+  }
+}
+
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -230,6 +262,16 @@ app.post('/api/users/signup', async (req, res) => {
       message: 'User created successfully',
       emailStatus: emailSent ? 'sent' : 'failed'
     });
+    // Generate dummy Excel file after user creation
+const dummyFilePath = path.join(__dirname, 'dummy_data', `${user._id}.xlsx`);
+if (!fs.existsSync(dummyFilePath)) {
+  const dummyData = [ /* same dummy array */ ];
+  const worksheet = XLSX.utils.json_to_sheet(dummyData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Transactions');
+  XLSX.writeFile(workbook, dummyFilePath);
+}
+
   } catch (error) {
     console.error('Signup error:', error);
     if (error.code === 11000) {
@@ -248,6 +290,7 @@ app.post('/api/users/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
+    
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -259,6 +302,9 @@ app.post('/api/users/login', async (req, res) => {
       email: user.email,
       userId: user._id
     });
+
+    
+    
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({ message: error.message });
@@ -278,7 +324,7 @@ app.post('/api/auth/google', async (req, res) => {
 
     const payload = ticket.getPayload();
     const { email, name, picture } = payload;
-
+    
     let user = await User.findOne({ email });
     if (!user) {
       user = new User({ username: name, email, password: 'google_auth_user' });
@@ -608,27 +654,3 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
-
-
-
-// app.get('/api/transactions/summary', authenticateToken, async (req, res) => {
-//   try {
-//     const transactions = await Transaction.find({ userId: req.user.userId });
-//     let income = 0, expense = 0, assets = 0, liabilities = 0;
-//     transactions.forEach(t => {
-//       const amt = Number(t.amount);
-//       switch (t.category) {
-//         case 'Income': income += amt; break;
-//         case 'Expense': expense += amt; break;
-//         case 'Asset': assets += amt; break;
-//         case 'Liability': liabilities += amt; break;
-//       }
-//     });
-//     const savings = income - expense;
-//     res.json({ income, expense, assets, liabilities, savings });
-//   } catch (err) {
-//     console.error('Summary error:', err);
-//     res.status(500).json({ message: 'Failed to fetch summary' });
-//   }
-// });
