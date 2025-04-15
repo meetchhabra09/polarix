@@ -18,7 +18,7 @@ const JWT_SECRET = 'your_jwt_secret_key'; // Replace with a secure, random key i
 // Middleware
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://your-vercel-app.vercel.app"
+  "https://polarix-678.vercel.app.vercel.app"
 ];
 
 app.use(cors({
