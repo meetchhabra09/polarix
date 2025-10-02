@@ -26,18 +26,6 @@ It helps users track **income, expenses, assets, liabilities, and savings** with
 
 ---
 
-## 📂 Project Structure
-```
-PolariX/
-│── public/          # Static frontend files (HTML, CSS, JS)
-│── routes/          # Express route handlers
-│── models/          # Mongoose models
-│── controllers/     # Business logic
-│── utils/           # Helper functions (Excel handling, etc.)
-│── .env             # Environment variables (Mongo URI, secrets)
-│── server.js        # Main entry point
-│── package.json     # Dependencies & scripts
-```
 
 ---
 
