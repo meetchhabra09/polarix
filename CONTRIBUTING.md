@@ -70,12 +70,7 @@ npm run dev
 ```
 Runs on: http://localhost:5000
 
-Frontend (Next.js + React)
-```BASH
-cd frontend
-npm install
-npm run dev
-```
+Frontend (HTML + CSS + javaScript)
 
 Runs on: http://localhost:3000
 
