@@ -20,7 +20,12 @@
 </head>
 
 <body>
-  <div class="sidebar">
+  <!-- Mobile Menu Toggle -->
+  <button class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="logo"><img src='./fav.png' width="40px" height="40px"></div>
       <div class="logo-text">PolariX</div>
@@ -112,19 +117,22 @@
 
       <!-- ✅ TradingView Ticker -->
       <div class="tradingview-widget-container" style="margin-bottom: 20px;">
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
-          {
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        </script>
+        <script type="text/javascript">
+          new TradingView.widget({
             "symbols": [
               { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
               { "proName": "BSE:SENSEX", "title": "SENSEX" },
               { "proName": "NASDAQ:NDX", "title": "NASDAQ" },
               { "proName": "AMEX:SPY", "title": "S&P 500" }
             ],
-              "colorTheme": "dark",
-                "isTransparent": true,
-                  "displayMode": "adaptive",
-                    "locale": "en"
-          }
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "locale": "en"
+          });
         </script>
       </div>
 
@@ -229,43 +237,40 @@
 
     </div>
 
-    <!-- Tabs Container (unchanged) -->
-    <div id="my-profile-tabs" class="tabs-container" style="display: flex;">
+    <!-- Tabs Container - Horizontal Slider -->
+    <div id="my-profile-tabs" class="tabs-container">
       <div class="tab active" id="tab-my-profile">
         <div class="tab-icon"><i class="fas fa-user"></i></div>
-        <div>My Profile</div>
+        <div class="tab-text">My Profile</div>
       </div>
       <div class="tab" id="tab-transactions">
         <div class="tab-icon"><i class="fas fa-exchange-alt"></i></div>
-        <div>Transactions</div>
+        <div class="tab-text">Transactions</div>
       </div>
       <div class="tab" id="tab-goals">
         <div class="tab-icon"><i class="fas fa-bullseye"></i></div>
-        <div>Goals</div>
+        <div class="tab-text">Goals</div>
       </div>
       <div class="tab" id="tab-assets">
         <div class="tab-icon"><i class="fas fa-coins"></i></div>
-        <div>Assets</div>
+        <div class="tab-text">Assets</div>
       </div>
       <div class="tab" id="tab-income">
         <div class="tab-icon"><i class="fas fa-hand-holding-usd"></i></div>
-        <div>Income</div>
+        <div class="tab-text">Income</div>
       </div>
       <div class="tab" id="tab-liabilities">
         <div class="tab-icon"><i class="fas fa-balance-scale"></i></div>
-        <div>Liabilities</div>
+        <div class="tab-text">Liabilities</div>
       </div>
       <div class="tab" id="tab-expenses">
         <div class="tab-icon"><i class="fas fa-shopping-cart"></i></div>
-        <div>Expenses</div>
+        <div class="tab-text">Expenses</div>
       </div>
-
-      <!-- Add this inside the .tabs-container -->
       <div class="tab" id="tab-calculator">
         <div class="tab-icon"><i class="fas fa-calculator"></i></div>
-        <div>EMI & Tax Calculator</div>
+        <div class="tab-text">Calculator</div>
       </div>
-
     </div>
 
     <!-- My Profile Section -->
@@ -898,7 +903,7 @@
 
 
 
-    <div class="form-container" id="calculator" style="display: flex;">
+    <div class="form-container" id="calculator" style="display: none;">
       <div class="top-bar">
         <div class="page-title">EMI & Tax Calculator</div>
         <div style="display: flex; align-items: center;">
@@ -912,27 +917,29 @@
           </div>
         </div>
       </div>
-      <br>
-      <div class="calculator-wrapper" style="display: flex; justify-content: space-around;">
+      
+      <div class="calculator-wrapper">
         <div class="calculator-card">
-          <div class="form-header ">
-            <div class="form-title ">EMI Calculator</div>
+          <div class="form-header">
+            <div class="form-title">EMI Calculator</div>
           </div>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Loan Amount (₹)</label>
-              <input type="number" id="loanAmount" class="form-control" />
+              <input type="number" id="loanAmount" class="form-control" placeholder="Enter loan amount" />
             </div>
             <div class="form-group">
               <label class="form-label">Interest Rate (%)</label>
-              <input type="number" id="interestRate" class="form-control" />
+              <input type="number" id="interestRate" class="form-control" placeholder="Enter interest rate" step="0.01" />
             </div>
             <div class="form-group">
               <label class="form-label">Tenure (Years)</label>
-              <input type="number" id="tenure" class="form-control" />
+              <input type="number" id="tenure" class="form-control" placeholder="Enter tenure" />
             </div>
             <div class="form-group">
-              <button onclick="calculateEMI()" class="calculator-button">Calculate EMI</button>
+              <button onclick="calculateEMI()" class="calculator-button">
+                <i class="fas fa-calculator"></i> Calculate EMI
+              </button>
             </div>
             <div class="form-group result">
               <p><strong>EMI:</strong> ₹<span id="emiResult">0.00</span></p>
@@ -941,6 +948,7 @@
             </div>
           </div>
         </div>
+        
         <div class="calculator-card">
           <div class="form-header">
             <div class="form-title">Tax Calculator</div>
@@ -948,27 +956,30 @@
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Annual Income (₹)</label>
-              <input type="number" id="taxIncome" class="form-control" />
+              <input type="number" id="taxIncome" class="form-control" placeholder="Enter annual income" />
             </div>
             <div class="form-group">
               <label class="form-label">Tax Regime</label>
               <select id="taxRegime" class="form-select">
-                <option value="new">New</option>
-                <option value="old">Old</option>
+                <option value="new">New Tax Regime</option>
+                <option value="old">Old Tax Regime</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">Assessment Year</label>
               <select id="taxYear" class="form-select">
                 <option value="2025">2025-26</option>
+                <option value="2024">2024-25</option>
               </select>
             </div>
             <div class="form-group">
-              <button onclick="calculateTax()" class="calculator-button">Calculate Tax</button>
+              <button onclick="calculateTax()" class="calculator-button">
+                <i class="fas fa-calculator"></i> Calculate Tax
+              </button>
             </div>
-            <div class="form-group">
+            <div class="form-group result">
               <p><strong>Estimated Tax:</strong> ₹<span id="taxResult">0.00</span></p>
-              <!-- <p><strong>Tax Rate:</strong><span id="taxrate">0.00</span>%</p> -->
+              <p><strong>Effective Tax Rate:</strong> <span id="taxRate">0.00</span>%</p>
             </div>
           </div>
         </div>
@@ -1101,11 +1112,95 @@
       return true;
     }
 
+    /*=============== MOBILE MENU TOGGLE ===============*/
+    function initializeMobileMenu() {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const sidebar = document.getElementById('sidebar');
+      
+      // Create overlay if it doesn't exist
+      let overlay = document.querySelector('.sidebar-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 999;
+          display: none;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        `;
+        document.body.appendChild(overlay);
+      }
+
+      function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.style.display = 'block';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+        }, 10);
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebar() {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          sidebar.classList.remove('open');
+          overlay.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+      }
+
+      // Toggle sidebar on hamburger click
+      mobileMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+
+      // Close sidebar when clicking overlay
+      overlay.addEventListener('click', closeSidebar);
+
+      // Close sidebar when clicking on nav items on mobile
+      const navItems = sidebar.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            closeSidebar();
+          }
+        });
+      });
+
+      // Close sidebar on window resize if screen becomes larger
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          closeSidebar();
+        }
+      });
+
+      // Close sidebar when pressing Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+          closeSidebar();
+        }
+      });
+    }
+
     // Check authentication when page loads
     document.addEventListener('DOMContentLoaded', function () {
       if (!checkAuthAndRedirect()) {
         return; // Stop execution if not authenticated
       }
+
+      // Initialize mobile menu
+      initializeMobileMenu();
 
       // Continue with normal dashboard initialization
       if (typeof initializeDashboard === 'function') {
