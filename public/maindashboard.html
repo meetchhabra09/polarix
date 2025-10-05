@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,16 +15,17 @@
   <!-- <script src="profile.js"></script> -->
   <link rel="icon" type="image/png" href="./fav.png">
   <link rel="stylesheet" href="./category.css">
-  
-  
+
+
 </head>
+
 <body>
   <div class="sidebar">
     <div class="sidebar-header">
       <div class="logo"><img src='./fav.png' width="40px" height="40px"></div>
       <div class="logo-text">PolariX</div>
     </div>
-    
+
     <div class="user-info">
       <div class="user-avatar">
         <i class="fas fa-user"></i>
@@ -31,8 +33,8 @@
       <div class="user-name">John Doe</div>
       <div class="user-role">Financial Director</div>
     </div>
-    
-    
+
+
     <ul class="nav-menu">
       <li class="nav-item" id="nav-home">
         <div class="nav-icon"><i class="fas fa-home"></i></div>
@@ -80,11 +82,15 @@
       </li>
       <li class="nav-item" id="nav-calculator">
         <div class="nav-icon"><i class="fas fa-calculator"></i></div>
-        <div >Calculator</div>
+        <div>Calculator</div>
+      </li>
+      <li class="nav-item" id="nav-logout">
+        <div class="nav-icon"><i class="fas fa-sign-out-alt"></i></div>
+        <div><a href="#" id="logout-link-sidebar" style="color: #e2e8f0; text-decoration: none;">Logout</a></div>
       </li>
     </ul>
   </div>
-  
+
   <div class="main-content">
     <!-- Dashboard Section (unchanged) -->
     <div id="dashboard" class="dashboard-section" style="display: none;">
@@ -103,29 +109,25 @@
       </div>
 
 
-      
-            <!-- ✅ TradingView Ticker -->
+
+      <!-- ✅ TradingView Ticker -->
       <div class="tradingview-widget-container" style="margin-bottom: 20px;">
-        <script type="text/javascript" async
-          src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
-        {
-          "symbols": [
-            { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
-            { "proName": "BSE:SENSEX", "title": "SENSEX" },
-            { "proName": "NASDAQ:NDX", "title": "NASDAQ" },
-            { "proName": "AMEX:SPY", "title": "S&P 500" }
-          ],
-          "colorTheme": "dark",
-          "isTransparent": true,
-          "displayMode": "adaptive",
-          "locale": "en"
-        }
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+          {
+            "symbols": [
+              { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+              { "proName": "BSE:SENSEX", "title": "SENSEX" },
+              { "proName": "NASDAQ:NDX", "title": "NASDAQ" },
+              { "proName": "AMEX:SPY", "title": "S&P 500" }
+            ],
+              "colorTheme": "dark",
+                "isTransparent": true,
+                  "displayMode": "adaptive",
+                    "locale": "en"
+          }
         </script>
       </div>
 
-
-
-          
 
 
       <div class="totals-card-container">
@@ -149,41 +151,41 @@
           <div class="totals-card-title">Total Savings</div>
           <div class="totals-card-value" id="totalSavingsCard">₹0</div>
         </div>
-        
+
       </div>
       <br>
       <div class="dashboard chart-container">
-        
-        
-        
-        
+
+
+
+
         <div class="card chart-card">
           <div class="title">Income vs Expense</div>
-          <canvas id="incomeExpenseChart" class="canvas" width="400" ></canvas>
+          <canvas id="incomeExpenseChart" class="canvas" width="400"></canvas>
         </div>
         <div class="card chart-card">
           <div class="title">Assets vs Liabilities</div>
-          <canvas id="assetsLiabilitiesChart" width="400"class="canvas" ></canvas>
+          <canvas id="assetsLiabilitiesChart" width="400" class="canvas"></canvas>
         </div>
         <div class="card chart-card">
           <div class="title">Total Savings</div>
-          <canvas id="savingsChart" width="400"class="canvas" ></canvas>
+          <canvas id="savingsChart" width="400" class="canvas"></canvas>
         </div>
         <!-- <div class="card chart-card dual-gauges"> -->
-          <!-- <div class="title">Goal & Finance Completion</div> -->
-          <div class="gauge-grid">
-            <!-- Goal Completion Gauge -->
-            <div class="gauge-container">
-              <div class="gauge-title">Goal Completion</div>
-              <div class="amount" id="goalStatsText">₹0 / ₹0</div>
-              <div class="gauge-wrapper">
-                <canvas id="goalCompletionGauge"></canvas>
-                <div class="center-label" id="goalGaugeText">0%</div>
-              </div>
+        <!-- <div class="title">Goal & Finance Completion</div> -->
+        <div class="gauge-grid">
+          <!-- Goal Completion Gauge -->
+          <div class="gauge-container">
+            <div class="gauge-title">Goal Completion</div>
+            <div class="amount" id="goalStatsText">₹0 / ₹0</div>
+            <div class="gauge-wrapper">
+              <canvas id="goalCompletionGauge"></canvas>
+              <div class="center-label" id="goalGaugeText">0%</div>
             </div>
-          
-            <!-- Savings Utilization Gauge -->
-            <!-- <div class="gauge-container">
+          </div>
+
+          <!-- Savings Utilization Gauge -->
+          <!-- <div class="gauge-container">
               <div class="gauge-title">Savings Utilization</div>
               <div class="amount" id="assetStatsText">₹0 / ₹0</div>
               <div class="gauge-wrapper">
@@ -191,11 +193,11 @@
                 <div class="center-label" id="assetGaugeText">0%</div>
               </div>
             </div> -->
-            
-          </div>
-          
-          
-          <!-- </div> -->
+
+        </div>
+
+
+        <!-- </div> -->
         <!-- </div> -->
         <div class="gauge-grid">
           <!-- Goal Completion Gauge -->
@@ -207,26 +209,26 @@
               <div class="center-label" id="assetGaugeText">0%</div>
             </div>
           </div>
-        
+
           <!-- Savings Utilization Gauge -->
-          
-          
+
+
         </div>
-                
-      
-        
+
+
+
         <div class="card chart-card wide-chart">
           <div class="title">Income & Expense Trend</div>
           <canvas id="incomeExpenseLineChart" class="wide-chart-canvas canvas"></canvas>
         </div>
 
-        
+
       </div>
-      
-      
+
+
 
     </div>
-    
+
     <!-- Tabs Container (unchanged) -->
     <div id="my-profile-tabs" class="tabs-container" style="display: flex;">
       <div class="tab active" id="tab-my-profile">
@@ -263,9 +265,9 @@
         <div class="tab-icon"><i class="fas fa-calculator"></i></div>
         <div>EMI & Tax Calculator</div>
       </div>
-      
+
     </div>
-    
+
     <!-- My Profile Section -->
     <div class="form-container" id="my-profile" style="display: block;">
       <div class="form-header">
@@ -426,7 +428,8 @@
         </div>
         <div class="form-group">
           <label class="form-label">Amount<span class="required">*</span></label>
-          <input type="number" class="form-control" id="transactionAmount" placeholder="Enter amount" step="0.01" required>
+          <input type="number" class="form-control" id="transactionAmount" placeholder="Enter amount" step="0.01"
+            required>
         </div>
         <div class="form-group">
           <label class="form-label">Account<span class="required">*</span></label>
@@ -462,38 +465,38 @@
       </div>
     </div>
 
-   <!-- Pop for Add Category Button -->
-   <div id="addCategoryPopup" class="popup">
-    <div class="popup-content">
-      <span class="close-btn" id="closeAddPopupBtn">×</span>
-      <h3>Add or Edit Category</h3>
-      <div class="form-group">
-        <label class="form-label">Category<span class="required">*</span></label>
-        <select id="categoryTypeSelect" class="form-control">
-          <option value="">-- Select Category --</option>
-          <option value="new">+ Create New</option>
-          <!-- Dynamically populate existing categories -->
-        </select>
-      </div>
-  
-      <div id="newCategoryInputGroup" class="form-group" style="display:none;">
-        <label class="form-label">New Category Name</label>
-        <input type="text" class="form-control" id="newCategoryName" placeholder="Enter new category name">
-      </div>
-  
-      <div id="subcategoryContainer" class="form-group">
-        <label class="form-label">Subcategories</label>
-        <div id="subcategoryFields">
-          <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory">
+    <!-- Pop for Add Category Button -->
+    <div id="addCategoryPopup" class="popup">
+      <div class="popup-content">
+        <span class="close-btn" id="closeAddPopupBtn">×</span>
+        <h3>Add or Edit Category</h3>
+        <div class="form-group">
+          <label class="form-label">Category<span class="required">*</span></label>
+          <select id="categoryTypeSelect" class="form-control">
+            <option value="">-- Select Category --</option>
+            <option value="new">+ Create New</option>
+            <!-- Dynamically populate existing categories -->
+          </select>
         </div>
-        <button class="action-button" id="addSubcategoryBtn">+ Add More Subcategory</button>
+
+        <div id="newCategoryInputGroup" class="form-group" style="display:none;">
+          <label class="form-label">New Category Name</label>
+          <input type="text" class="form-control" id="newCategoryName" placeholder="Enter new category name">
+        </div>
+
+        <div id="subcategoryContainer" class="form-group">
+          <label class="form-label">Subcategories</label>
+          <div id="subcategoryFields">
+            <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory">
+          </div>
+          <button class="action-button" id="addSubcategoryBtn">+ Add More Subcategory</button>
+        </div>
+
+        <button class="save-button" id="saveNewCategoryBtn">Save</button>
+        <br>
+        <button class="delete-button" id="deleteCategoryBtn">Delete</button>
       </div>
-  
-      <button class="save-button" id="saveNewCategoryBtn">Save</button>
-      <br>
-      <button class="delete-button" id="deleteCategoryBtn">Delete</button>
     </div>
-  </div>
 
     <!-- Pop-up for Add Account (unchanged) -->
     <div id="addAccountPopup" class="popup">
@@ -608,7 +611,7 @@
       </div>
     </div>
 
-  <!-- Goals Section -->
+    <!-- Goals Section -->
     <div class="form-container" id="goals" style="display: none;">
       <div class="top-bar">
         <div class="page-title">Goals</div>
@@ -629,15 +632,16 @@
           <button class="new-button" data-section="goals">
             <i class="fas fa-plus"></i> New
           </button>
-          <button class="save-button" >
+          <button class="save-button">
             <i class="fas fa-save"></i> Save
           </button>
         </div>
       </div>
 
       <div class="total-income totals-card income-card" style="margin: 20px 0; font-size: 18px; color: #fff;">
-        <label class="totals-card-title"><strong>Total Goals Savings Amount:</strong> ₹<span id="totalGoalsAmount">0.00</span></label>
-        
+        <label class="totals-card-title"><strong>Total Goals Savings Amount:</strong> ₹<span
+            id="totalGoalsAmount">0.00</span></label>
+
       </div>
 
       <div class="form-grid">
@@ -684,7 +688,7 @@
       </div>
     </div>
 
-  <!-- Income Section -->
+    <!-- Income Section -->
     <div class="form-container" id="income" style="display: none;">
       <div class="top-bar">
         <div class="page-title">Income</div>
@@ -700,7 +704,8 @@
         </div>
       </div>
       <div class="total-income totals-card income-card" style="margin: 20px 0; font-size: 18px; color: #fff;">
-        <label class="totals-card-title"><strong>Total Income:</strong> ₹<span id="totalIncomeAmount">0.00</span></label>
+        <label class="totals-card-title"><strong>Total Income:</strong> ₹<span
+            id="totalIncomeAmount">0.00</span></label>
         <select id="incomePeriod" class="period-button" style="margin-left: 10px; padding: 5px;">
           <option value="monthly">Monthly</option>
           <option value="quarterly">Quarterly</option>
@@ -846,51 +851,51 @@
       </div>
     </div>
 
-  <!-- Category Section -->
-  <div class="form-container" id="category" style="display: block;">
-    <div class="top-bar">
-      <div class="page-title">Categories</div>
-      <div style="display: flex; align-items: center;">
-        <div class="date-selector">
-          <i class="fas fa-calendar"></i>  
-          <span id="currentDateCategory"></span>
-        </div>
-        <div class="notifications">
-          <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
-          <div class="notification-badge" id="notificationBadgeCategory">0</div>
+    <!-- Category Section -->
+    <div class="form-container" id="category" style="display: block;">
+      <div class="top-bar">
+        <div class="page-title">Categories</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>
+            <span id="currentDateCategory"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeCategory">0</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-header">
-      <!-- <div class="form-title">Categories</div>
+      <div class="form-header">
+        <!-- <div class="form-title">Categories</div>
       <div class="form-header-buttons">
         <button class="save-button">
           <i class="fas fa-save"></i> Save
         </button>
       </div> -->
+      </div>
+      <div class="chart-row-category">
+        <div class="chart-container-category">
+          <canvas id="incomeBarChart" class="canvas-category"></canvas>
+        </div>
+        <div class="chart-container-category" id="assetChartContainer">
+          <canvas id="assetPieChart" class="canvas-category"></canvas>
+          <div class="table-container" id="assetTableContainer"></div>
+        </div>
+      </div>
+      <div class="chart-row-category">
+        <div class="chart-container-category">
+          <canvas id="expenseBarChart" class="canvas-category"></canvas>
+        </div>
+        <div class="chart-container-category" id="liabilityChartContainer">
+          <canvas id="liabilityPieChart" class="canvas-category"></canvas>
+          <div class="table-container" id="liabilityTableContainer"></div>
+        </div>
+      </div>
     </div>
-    <div class="chart-row-category">
-      <div class="chart-container-category">
-        <canvas id="incomeBarChart" class="canvas-category"></canvas>
-      </div>
-      <div class="chart-container-category" id="assetChartContainer">
-        <canvas id="assetPieChart" class="canvas-category"></canvas>
-        <div class="table-container" id="assetTableContainer"></div>
-      </div>
-    </div>
-    <div class="chart-row-category">
-      <div class="chart-container-category">
-        <canvas id="expenseBarChart" class="canvas-category"></canvas>
-      </div>
-      <div class="chart-container-category" id="liabilityChartContainer">
-        <canvas id="liabilityPieChart" class="canvas-category"></canvas>
-        <div class="table-container" id="liabilityTableContainer"></div>
-      </div>
-    </div>
-  </div>
 
-      
-  
+
+
 
 
     <div class="form-container" id="calculator" style="display: flex;">
@@ -909,33 +914,33 @@
       </div>
       <br>
       <div class="calculator-wrapper" style="display: flex; justify-content: space-around;">
-          <div class="calculator-card">
-            <div class="form-header ">
-              <div class="form-title ">EMI Calculator</div>
+        <div class="calculator-card">
+          <div class="form-header ">
+            <div class="form-title ">EMI Calculator</div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Loan Amount (₹)</label>
+              <input type="number" id="loanAmount" class="form-control" />
             </div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Loan Amount (₹)</label>
-                <input type="number" id="loanAmount" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Interest Rate (%)</label>
-                <input type="number" id="interestRate" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Tenure (Years)</label>
-                <input type="number" id="tenure" class="form-control" />
-              </div>
-              <div class="form-group">
-                <button onclick="calculateEMI()" class="calculator-button">Calculate EMI</button>
-              </div>
-              <div class="form-group result">
-                <p><strong>EMI:</strong> ₹<span id="emiResult">0.00</span></p>
-                <p><strong>Total Payable:</strong> ₹<span id="totalAmountResult">0.00</span></p>
-                <p><strong>Interest:</strong> ₹<span id="totalInterestResult">0.00</span></p>
-              </div>
+            <div class="form-group">
+              <label class="form-label">Interest Rate (%)</label>
+              <input type="number" id="interestRate" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tenure (Years)</label>
+              <input type="number" id="tenure" class="form-control" />
+            </div>
+            <div class="form-group">
+              <button onclick="calculateEMI()" class="calculator-button">Calculate EMI</button>
+            </div>
+            <div class="form-group result">
+              <p><strong>EMI:</strong> ₹<span id="emiResult">0.00</span></p>
+              <p><strong>Total Payable:</strong> ₹<span id="totalAmountResult">0.00</span></p>
+              <p><strong>Interest:</strong> ₹<span id="totalInterestResult">0.00</span></p>
             </div>
           </div>
+        </div>
         <div class="calculator-card">
           <div class="form-header">
             <div class="form-title">Tax Calculator</div>
@@ -971,80 +976,82 @@
     </div>
 
 
-      <!-- Popup for New Fields (Add this anywhere in your HTML if not present) -->
-      <!-- <div id="addFieldPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; z-index: 1000;">
+    <!-- Popup for New Fields (Add this anywhere in your HTML if not present) -->
+    <!-- <div id="addFieldPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; z-index: 1000;">
         <input id="newFieldLabel" type="text" placeholder="Enter field label">
         <button id="saveNewFieldBtn">Save</button>
         <button id="closeFieldPopupBtn">Close</button>
         </div> -->
 
-    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
-        
-        <!-- Reminder Section -->
-        <div class="form-container" id="reminder" style="display: none;">
-          <div class="top-bar">
-            <div class="page-title">Reminder</div>
-            <div style="display: flex; align-items: center;">
-              <div class="date-selector">
-                <i class="fas fa-calendar"></i>&nbsp;&nbsp;
-                <span id="currentDateReminder"></span>
-              </div>
-              <div class="notifications">
-                <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
-                <div class="notification-badge" id="notificationBadgeReminder">0</div>
-              </div>
-            </div>
-          </div>
-          <div class="form-header">
-            <div class="form-title">Reminders</div>
-            <div class="form-header-buttons">
-              <button class="new-button" data-section="reminder">
-                <i class="fas fa-plus"></i> New
-              </button>
-              <button class="save-button" id="saveReminder">
-                <i class="fas fa-save"></i> Save
-              </button>
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label">Reminder Title</label>
-              <input type="text" class="form-control" id="reminderTitle" placeholder="Enter title">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Due Date</label>
-              <input type="date" class="form-control" id="reminderDate">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Priority</label>
-              <select class="form-select" id="reminderPriority">
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Notes</label>
-              <input type="text" class="form-control" id="reminderNotes" placeholder="Enter notes">
-            </div>
-          </div>
-        </div>
+    <div id="overlay"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;">
+    </div>
 
-        <!-- New Field Popup -->
-        <div id="addFieldPopup" class="popup" style="display: none;">
-          <div class="popup-content">
-            <span class="close-btn" id="closeFieldPopupBtn">×</span>
-            <h3>Add New Field</h3>
-            <form id="addFieldForm">
-              <div class="form-group">
-                <input type="text" id="newFieldLabel" class="form-control" placeholder="Enter field label" required>
-              </div>
-              <button type="button" class="save-button" id="saveNewFieldBtn">Add</button>
-            </form>
+    <!-- Reminder Section -->
+    <div class="form-container" id="reminder" style="display: none;">
+      <div class="top-bar">
+        <div class="page-title">Reminder</div>
+        <div style="display: flex; align-items: center;">
+          <div class="date-selector">
+            <i class="fas fa-calendar"></i>&nbsp;&nbsp;
+            <span id="currentDateReminder"></span>
+          </div>
+          <div class="notifications">
+            <i class="fas fa-bell" style="font-size: 18px; color: #e2e8f0;"></i>
+            <div class="notification-badge" id="notificationBadgeReminder">0</div>
           </div>
         </div>
-   
-        
+      </div>
+      <div class="form-header">
+        <div class="form-title">Reminders</div>
+        <div class="form-header-buttons">
+          <button class="new-button" data-section="reminder">
+            <i class="fas fa-plus"></i> New
+          </button>
+          <button class="save-button" id="saveReminder">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Reminder Title</label>
+          <input type="text" class="form-control" id="reminderTitle" placeholder="Enter title">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Due Date</label>
+          <input type="date" class="form-control" id="reminderDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Priority</label>
+          <select class="form-select" id="reminderPriority">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <input type="text" class="form-control" id="reminderNotes" placeholder="Enter notes">
+        </div>
+      </div>
+    </div>
+
+    <!-- New Field Popup -->
+    <div id="addFieldPopup" class="popup" style="display: none;">
+      <div class="popup-content">
+        <span class="close-btn" id="closeFieldPopupBtn">×</span>
+        <h3>Add New Field</h3>
+        <form id="addFieldForm">
+          <div class="form-group">
+            <input type="text" id="newFieldLabel" class="form-control" placeholder="Enter field label" required>
+          </div>
+          <button type="button" class="save-button" id="saveNewFieldBtn">Add</button>
+        </form>
+      </div>
+    </div>
+
+
   </div>
 
 
@@ -1057,11 +1064,62 @@
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <script>
+    /*=============== AUTHENTICATION CHECK ===============*/
+    function checkAuthAndRedirect() {
+      const user = JSON.parse(localStorage.getItem('user')) || null;
+
+      if (!user || !user.token) {
+        // User is not authenticated, redirect to signup page
+        alert('Please log in to access the dashboard.');
+        window.location.href = 'signup.html';
+        return false;
+      }
+
+      // Update user info in the sidebar if user is authenticated
+      if (user.username) {
+        const userNameElement = document.querySelector('.user-name');
+        if (userNameElement) {
+          userNameElement.textContent = user.username;
+        }
+      }
+
+      // Add logout functionality
+      const logoutLink = document.getElementById('logout-link-sidebar');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          localStorage.removeItem('user');
+          alert('You have been logged out successfully!');
+          window.location.href = 'index.html';
+        });
+      }
+
+      return true;
+    }
+
+    // Check authentication when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!checkAuthAndRedirect()) {
+        return; // Stop execution if not authenticated
+      }
+
+      // Continue with normal dashboard initialization
+      if (typeof initializeDashboard === 'function') {
+        initializeDashboard();
+      }
+      updateDate();
+      setInterval(updateDate, 60000);
+      updateNotifications();
+    });
+  </script>
   <script src="./js/dashboard.js"></script>
   <script src="./js/profile.js"></script>
   <script src="./js/calculator.js"></script>
   <script src="./js/category.js"></script>
 </body>
+
 </html>

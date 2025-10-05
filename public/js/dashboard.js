@@ -301,14 +301,12 @@ saveReminderBtn.addEventListener('click', () => {
   }
 });
 
-// Initial setup
-document.querySelector('#my-profile').style.display = 'block'; // Start with My Profile
-document.querySelector('.nav-item:nth-child(3)').classList.add('active'); // Set My Profile as active
-document.querySelector('#my-profile-tabs').style.display = 'flex'; // Show tabs initially
-updateDate();
-setInterval(updateDate, 60000); // Update date every minute
-updateNotifications(); // Initial notification update
 
+function initializeDashboard() {
+  document.querySelector('#my-profile').style.display = 'block'; // Start with My Profile
+  document.querySelector('.nav-item:nth-child(3)').classList.add('active'); // Set My Profile as active
+  document.querySelector('#my-profile-tabs').style.display = 'flex'; // Show tabs initially
+}
 
 
 function renderArcGauge(canvasId, percent, labelId, current, goal, color = '#22c55e') {
